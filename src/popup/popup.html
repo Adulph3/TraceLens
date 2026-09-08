@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>TraceLens</title>
+    <link rel="stylesheet" href="popup.css">
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="brand">
+        <img src="../icons/icon.svg" width="34" height="34" alt="">
+        <div>
+          <h1>TraceLens</h1>
+          <p>Local privacy inspection</p>
+        </div>
+      </div>
+      <span class="memory-badge"><span aria-hidden="true"></span>In memory</span>
+    </header>
+
+    <p id="status-announcer" class="sr-only" role="status" aria-live="polite" aria-atomic="true"></p>
+
+    <main id="popup-main" aria-busy="true">
+      <section id="loading" class="state-card">
+        <span class="spinner" aria-hidden="true"></span>
+        <div><strong>Reading this tab</strong><p>Building a local snapshot…</p></div>
+      </section>
+
+      <section id="error-state" class="state-card state-card-error" role="alert" hidden>
+        <span class="state-icon" aria-hidden="true">!</span>
+        <div><h2>Analysis unavailable</h2><p id="error-message"></p></div>
+        <button id="error-retry" class="quiet-button" type="button">Try again</button>
+      </section>
+
+      <div id="report" hidden>
+        <section class="hero-card">
+          <div class="site-row">
+            <div class="site-copy">
+              <p class="eyebrow">Current site</p>
+              <h2 id="hostname"></h2>
+              <p id="coverage-note" class="subtle"></p>
+            </div>
+            <button id="refresh" class="icon-button" type="button" aria-label="Refresh report" title="Refresh report">↻</button>
+          </div>
+
+          <div class="score-layout">
+            <div class="score-ring" id="score-ring" role="img" aria-label="Privacy score based on observed signals">
+              <svg viewBox="0 0 120 120" aria-hidden="true">
+                <circle class="score-track" cx="60" cy="60" r="52" pathLength="100"></circle>
+                <circle id="score-progress" class="score-progress" cx="60" cy="60" r="52" pathLength="100"></circle>
+              </svg>
+              <div class="score-value"><strong id="score">—</strong><span id="score-denominator">/100</span></div>
+            </div>
+            <div class="score-copy">
+              <p class="eyebrow">Observed privacy score</p>
+              <h3 id="score-label">Waiting for data</h3>
+              <p id="score-summary"></p>
+            </div>
+          </div>
+
+          <div id="partial-alert" class="inline-alert" role="status" hidden>
+            <strong id="score-alert-title">Partial observation</strong>
+            <span id="score-alert-message">Score is based only on signals observed so far.</span>
+          </div>
+        </section>
+
+        <section aria-labelledby="signals-heading">
+          <div class="section-heading">
+            <div><p class="eyebrow">Snapshot</p><h2 id="signals-heading">Observed signals</h2></div>
+          </div>
+          <div class="metric-grid">
+            <article class="metric metric-danger"><strong id="tracker-count">0</strong><span>Known tracker domains</span></article>
+            <article class="metric"><strong id="advertising-count">0</strong><span>Advertising tracker domains</span></article>
+            <article class="metric"><strong id="analytics-count">0</strong><span>Analytics tracker domains</span></article>
+            <article class="metric"><strong id="social-count">0</strong><span>Social tracker domains</span></article>
+            <article class="metric"><strong id="third-party-count">0</strong><span>Third-party domains</span></article>
+            <article class="metric"><strong id="request-count">0</strong><span>Observed requests</span></article>
+          </div>
+        </section>
+
+        <details class="third-party-details">
+          <summary><span class="summary-label"><span class="disclosure-icon" aria-hidden="true">›</span>Observed third-party domain details</span><span id="unknown-count" class="count-pill">0 unknown</span></summary>
+          <ul id="third-party-list" class="compact-list"></ul>
+        </details>
+
+        <section aria-labelledby="cookies-heading">
+          <div class="section-heading">
+            <div><p class="eyebrow">Current-site snapshot</p><h2 id="cookies-heading">Cookie metadata</h2></div>
+            <span id="cookie-total" class="count-pill">0 total</span>
+          </div>
+          <div id="cookie-unavailable" class="empty-copy" hidden>Cookie metadata is unavailable for this page.</div>
+          <div id="cookie-grid" class="detail-grid">
+            <div><strong id="cookie-secure">0</strong><span>Secure</span></div>
+            <div><strong id="cookie-http-only">0</strong><span>HTTP-only</span></div>
+            <div><strong id="cookie-persistent">0</strong><span>Persistent</span></div>
+            <div><strong id="cookie-same-site-none">0</strong><span>SameSite=None</span></div>
+            <div><strong id="cookie-partitioned">0</strong><span>Partitioned</span></div>
+            <div><strong id="cookie-script-accessible">0</strong><span>Script-accessible</span></div>
+          </div>
+          <p id="cookie-caveat" class="fine-print"></p>
+        </section>
+
+        <section aria-labelledby="score-details-heading">
+          <div class="section-heading">
+            <div><p id="score-details-eyebrow" class="eyebrow">Observed evidence</p><h2 id="score-details-heading">Score details</h2></div>
+          </div>
+          <div id="no-deductions" class="empty-copy">No deductions from observed signals.</div>
+          <ul id="deduction-list" class="deduction-list"></ul>
+          <div class="score-equation" aria-label="Score calculation">
+            <span>Starting score <strong>100</strong></span>
+            <span>Total deductions <strong id="total-deductions">−0</strong></span>
+            <span id="score-equation-result">max(0, 100 − 0) = 100</span>
+          </div>
+          <p id="score-disclaimer" class="fine-print"></p>
+        </section>
+
+        <section aria-labelledby="trackers-heading">
+          <div class="section-heading">
+            <div><p class="eyebrow">Bundled-list evidence</p><h2 id="trackers-heading">Known trackers</h2></div>
+            <span id="tracker-total-pill" class="count-pill">0 domains</span>
+          </div>
+          <div id="tracker-empty" class="empty-copy">No bundled-list matches observed.</div>
+          <ul id="tracker-list" class="finding-list"></ul>
+        </section>
+
+        <section aria-labelledby="permissions-heading">
+          <div class="section-heading">
+            <div><p class="eyebrow">Page origin</p><h2 id="permissions-heading">Current browser permission status</h2></div>
+          </div>
+          <ul id="permissions-list" class="permission-list"></ul>
+          <p id="permissions-caveat" class="fine-print"></p>
+        </section>
+
+        <details class="third-party-details limitations-details">
+          <summary><span class="summary-label"><span class="disclosure-icon" aria-hidden="true">›</span>Accuracy &amp; limitations</span></summary>
+          <ul id="limitations-list" class="limitation-list"></ul>
+        </details>
+
+        <section class="export-card" aria-labelledby="export-heading">
+          <div>
+            <p class="eyebrow">Optional local export</p>
+            <h2 id="export-heading">Save this report</h2>
+            <p>Choose a local file format. TraceLens does not keep another exported copy.</p>
+          </div>
+          <div class="export-controls">
+            <label for="export-format" class="sr-only">Report format</label>
+            <select id="export-format">
+              <option value="json">JSON</option>
+              <option value="html">HTML</option>
+            </select>
+            <button id="save-report" class="primary-button" type="button">Save Report</button>
+          </div>
+          <p id="save-status" class="save-status" aria-live="polite"></p>
+        </section>
+
+        <aside class="privacy-note">
+          <span class="privacy-icon" aria-hidden="true">✓</span>
+          <div><strong>Nothing is saved automatically</strong><p id="privacy-notice"></p></div>
+        </aside>
+
+        <footer><span id="analyzed-at"></span><span>Score model 2.0</span></footer>
+      </div>
+    </main>
+
+    <script src="popup.js"></script>
+  </body>
+</html>

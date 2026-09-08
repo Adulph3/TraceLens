@@ -1,0 +1,38 @@
+{
+  "name": "tracelens",
+  "version": "0.1.0",
+  "private": true,
+  "license": "MIT",
+  "description": "A local-first, ephemeral Firefox privacy analyzer.",
+  "type": "module",
+  "scripts": {
+    "build": "npm run data:check && npm run typecheck && node scripts/build.mjs",
+    "data:check": "node scripts/generate-tracker-database.mjs --check",
+    "data:generate": "node scripts/generate-tracker-database.mjs --write",
+    "data:validate": "node scripts/generate-tracker-database.mjs --validate",
+    "lint": "eslint src tests scripts --max-warnings 0",
+    "package": "npm run build && node --require ./scripts/validator-guard.cjs ./node_modules/web-ext/bin/web-ext.js build --source-dir dist --artifacts-dir artifacts --overwrite-dest",
+    "start": "npm run build && web-ext run --source-dir dist --firefox /usr/bin/firefox",
+    "test": "node --test tests/*.test.ts tests/*.test.mjs",
+    "test:score": "node --test tests/score.test.ts",
+    "typecheck": "tsc --noEmit",
+    "validate:firefox": "npm run build && node --require ./scripts/validator-guard.cjs ./node_modules/web-ext/bin/web-ext.js lint --source-dir dist --warnings-as-errors",
+    "test:firefox": "npm run build && node scripts/firefox-smoke.mjs"
+  },
+  "engines": {
+    "node": ">=22.18"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "@types/firefox-webext-browser": "^143.0.0",
+    "@types/node": "^26.4.1",
+    "esbuild": "^0.28.2",
+    "eslint": "^10.9.1",
+    "typescript": "^6.0.3",
+    "typescript-eslint": "^8.69.0",
+    "web-ext": "^10.6.0"
+  },
+  "dependencies": {
+    "tldts": "^7.4.11"
+  }
+}

@@ -1,0 +1,146 @@
+{
+  "schemaVersion": "1.0",
+  "reviewedAt": "2026-09-06",
+  "entries": [
+    {
+      "id": "google-ads-doubleclick",
+      "domain": "doubleclick.net",
+      "organization": "Google",
+      "category": "advertising",
+      "evidence": [
+        {
+          "type": "provider-technical-documentation",
+          "title": "Cookie Matching | Real-time Bidding | Google for Developers",
+          "url": "https://developers.google.com/authorized-buyers/rtb/cookie-guide",
+          "verifiedAt": "2026-09-06"
+        }
+      ],
+      "provenance": {
+        "method": "manual-factual-curation",
+        "redistributesExternalDataset": false,
+        "note": "TraceLens records an original factual classification and a citation. It does not copy provider prose, code, or a third-party tracker dataset."
+      },
+      "note": "Google documents doubleclick.net cookies and user-ID matching for real-time advertising bids. The dedicated parent domain is retained so documented service subdomains match at DNS label boundaries."
+    },
+    {
+      "id": "google-ads-services",
+      "domain": "googleadservices.com",
+      "organization": "Google",
+      "category": "advertising",
+      "evidence": [
+        {
+          "type": "provider-technical-documentation",
+          "title": "Set up enhanced conversions for web using Google Tag Manager | Google Ads Help",
+          "url": "https://support.google.com/google-ads/answer/13262500?hl=en",
+          "verifiedAt": "2026-09-06"
+        }
+      ],
+      "provenance": {
+        "method": "manual-factual-curation",
+        "redistributesExternalDataset": false,
+        "note": "TraceLens records an original factual classification and a citation. It does not copy provider prose, code, or a third-party tracker dataset."
+      },
+      "note": "Google Ads documents browser conversion requests to googleadservices.com. The domain is categorized as advertising because the documented endpoint performs advertising conversion measurement and matching."
+    },
+    {
+      "id": "google-ads-syndication",
+      "domain": "googlesyndication.com",
+      "organization": "Google",
+      "category": "advertising",
+      "evidence": [
+        {
+          "type": "provider-technical-documentation",
+          "title": "AdSense for Platforms: ad tags | Google for Developers",
+          "url": "https://developers.google.com/adsense/platforms/direct/ad-tags",
+          "verifiedAt": "2026-09-06"
+        }
+      ],
+      "provenance": {
+        "method": "manual-factual-curation",
+        "redistributesExternalDataset": false,
+        "note": "TraceLens records an original factual classification and a citation. It does not copy provider prose, code, or a third-party tracker dataset."
+      },
+      "note": "Google documents pagead2.googlesyndication.com as the script source for AdSense ad units and auto ads. The dedicated parent domain covers those documented ad-service subdomains."
+    },
+    {
+      "id": "google-analytics",
+      "domain": "google-analytics.com",
+      "organization": "Google",
+      "category": "analytics",
+      "evidence": [
+        {
+          "type": "provider-technical-documentation",
+          "title": "Measurement Protocol reference | Google Analytics | Google for Developers",
+          "url": "https://developers.google.com/analytics/devguides/collection/protocol/ga4/reference",
+          "verifiedAt": "2026-09-06"
+        }
+      ],
+      "provenance": {
+        "method": "manual-factual-curation",
+        "redistributesExternalDataset": false,
+        "note": "TraceLens records an original factual classification and a citation. It does not copy provider prose, code, or a third-party tracker dataset."
+      },
+      "note": "Google identifies www.google-analytics.com and region1.google-analytics.com as Google Analytics event-collection endpoints. The parent domain covers those documented analytics subdomains."
+    },
+    {
+      "id": "clarity",
+      "domain": "clarity.ms",
+      "organization": "Microsoft",
+      "category": "analytics",
+      "evidence": [
+        {
+          "type": "provider-technical-documentation",
+          "title": "Troubleshooting Installation | Microsoft Clarity | Microsoft Learn",
+          "url": "https://learn.microsoft.com/en-us/clarity/setup-and-installation/troubleshooting-installation",
+          "verifiedAt": "2026-09-06"
+        }
+      ],
+      "provenance": {
+        "method": "manual-factual-curation",
+        "redistributesExternalDataset": false,
+        "note": "TraceLens records an original factual classification and a citation. It does not copy provider prose, code, or a third-party tracker dataset."
+      },
+      "note": "Microsoft documents www.clarity.ms/collect as the collection request for the Clarity tracking code and describes Clarity as collecting site interaction data."
+    },
+    {
+      "id": "linkedin-insight",
+      "domain": "snap.licdn.com",
+      "organization": "LinkedIn",
+      "category": "social",
+      "evidence": [
+        {
+          "type": "provider-technical-documentation",
+          "title": "Troubleshoot the LinkedIn Insight Tag | LinkedIn Help",
+          "url": "https://www.linkedin.com/help/linkedin/answer/a425696",
+          "verifiedAt": "2026-09-06"
+        }
+      ],
+      "provenance": {
+        "method": "manual-factual-curation",
+        "redistributesExternalDataset": false,
+        "note": "TraceLens records an original factual classification and a citation. It does not copy provider prose, code, or a third-party tracker dataset."
+      },
+      "note": "LinkedIn names snap.licdn.com as an Insight Tag domain and documents the tag's campaign reporting, conversion tracking, retargeting, and audience-insight uses."
+    },
+    {
+      "id": "adobe-audience-manager",
+      "domain": "demdex.net",
+      "organization": "Adobe",
+      "category": "other",
+      "evidence": [
+        {
+          "type": "provider-technical-documentation",
+          "title": "Understanding Calls to the Demdex Domain | Adobe Audience Manager",
+          "url": "https://experienceleague.adobe.com/en/docs/audience-manager/user-guide/reference/demdex-calls",
+          "verifiedAt": "2026-09-06"
+        }
+      ],
+      "provenance": {
+        "method": "manual-factual-curation",
+        "redistributesExternalDataset": false,
+        "note": "TraceLens records an original factual classification and a citation. It does not copy provider prose, code, or a third-party tracker dataset."
+      },
+      "note": "Adobe documents demdex.net as an Adobe-controlled Audience Manager and Experience Cloud Identity Service domain used for customer-data synchronization and ID requests."
+    }
+  ]
+}

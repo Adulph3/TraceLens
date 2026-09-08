@@ -1,0 +1,46 @@
+# Dependencies and generated build/package output
+node_modules/
+dist/
+artifacts/
+coverage/
+.nyc_output/
+.web-ext-artifacts/
+web-ext-artifacts/
+*.xpi
+*.zip
+
+# Local configuration and secrets
+.env
+.env.*
+!.env.example
+*.local
+*.pem
+*.key
+*.p12
+*.pfx
+
+# TraceLens reports can contain browsing-domain metadata
+reports/
+tracelens-*.json
+tracelens-*.html
+
+# Logs, temporary files, and test profiles
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+tmp/
+.tmp/
+.firefox-profile/
+*.tmp
+*.swp
+*~
+
+# Local tooling, editors, and operating-system metadata
+.agents/
+.codex/
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
