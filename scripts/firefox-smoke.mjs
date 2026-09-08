@@ -108,7 +108,7 @@ try {
     );
     assert.equal(companionActive, true, "uBlock Origin companion add-on is active");
   }
-  const base = await execute('return WebExtensionPolicy.getByID("tracelens@local.invalid").getURL("");');
+  const base = await execute('return WebExtensionPolicy.getByID("tracelens@adulph3").getURL("");');
   await command("Marionette:SetContext", { value: "content" });
   await command("WebDriver:Navigate", { url: `${base}popup/popup.html` });
   const evaluate = (body, args = []) => execute(`

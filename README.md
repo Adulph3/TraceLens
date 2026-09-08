@@ -61,7 +61,7 @@ npm run package
 - The extension uses Firefox Manifest V2 and a persistent in-memory background page intentionally.
 - Privacy Score 2.0 is stable for the MVP and remains an observed-evidence heuristic, not a universal site rating.
 - Tracker coverage is a seven-rule, provider-documented seed set generated from validated per-entry provenance.
-- The project has not been published to GitHub or submitted to Mozilla Add-ons.
+- The project is public on GitHub but has not been submitted to Mozilla Add-ons.
 
 ## Architecture
 
