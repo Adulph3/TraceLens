@@ -6,18 +6,22 @@ test("manifest permissions are limited to the MVP capabilities", async () => {
   const manifest = JSON.parse(
     await readFile(new URL("../src/manifest.json", import.meta.url), "utf8"),
   ) as {
+    version: string;
     permissions: string[];
     background: { persistent: boolean };
     content_security_policy: string;
     incognito: string;
     browser_specific_settings: {
       gecko: {
+        id: string;
         strict_min_version: string;
         data_collection_permissions: { required: string[] };
       };
     };
   };
 
+  assert.equal(manifest.version, "0.1.1");
+  assert.equal(manifest.browser_specific_settings.gecko.id, "tracelens@adulph3");
   assert.deepEqual(manifest.permissions, [
     "webRequest",
     "cookies",
